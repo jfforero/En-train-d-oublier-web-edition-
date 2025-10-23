@@ -1,26 +1,41 @@
 let active1 = false;
 let scrollerMiddle1;
 
-// Image filenames
+// Array of image filenames
 const imageFilenames = [
-  'tren1b.jpg','tren2b.jpg','tren3b.jpg','tren4b.jpg','tren5b.jpg',
-  'tren6b.jpg','tren8b.jpg','tren9b.jpg','tren10b.jpg','tren11b.jpg'
+  'tren1b.jpg',
+  'tren2b.jpg',
+  'tren3b.jpg',
+  'tren4b.jpg',
+  'tren5b.jpg',
+  'tren6b.jpg',
+  'tren8b.jpg',
+  'tren9b.jpg',
+  'tren10b.jpg',
+  'tren11b.jpg',
 ];
 
+// Array of initial image filenames
 const imageFilenames_inicio = [
-  'tren01.jpg','tren02.jpg','tren03.jpg','tren04.jpg','tren05.jpg','tren06.jpg'
+  'tren01.jpg',
+  'tren02.jpg',
+  'tren03.jpg',
+  'tren04.jpg',
+  'tren05.jpg',
+  'tren06.jpg',
 ];
+
+function setup() {
+  createCanvas(0, 0);
+  setRandomImageForImage2();
+}
 
 document.addEventListener('DOMContentLoaded', function () {
-  const wrapper = document.querySelector('.wrapper');
   scrollerMiddle1 = document.querySelector('.scroller-middle');
 
-  // Set initial random images
-  setRandomImages();
-
-  // Mouse events for scroller
+  // Event listeners for the first pair of images
   scrollerMiddle1.addEventListener('mousedown', function () {
-    active1 = true;
+    active1 = "middle";
     scrollerMiddle1.classList.add('scrolling');
   });
 
@@ -36,34 +51,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.body.addEventListener('mousemove', function (e) {
     if (!active1) return;
-    const x = e.pageX - wrapper.getBoundingClientRect().left;
-    scrollIt(x);
+
+    let x = e.pageX;
+    x -= document.querySelector('.wrapper').getBoundingClientRect().left;
+    scrollIt(x, scrollerMiddle1);
   });
 
-  // Initialize scroller in the middle
-  scrollIt(wrapper.offsetWidth / 2);
+  function scrollIt(x, scroller) {
+    let transform = Math.max(0, Math.min(x, scroller.parentElement.offsetWidth));
 
-  // Resize handling
-  window.addEventListener('resize', () => {
-    const middleWidth = document.querySelector('.middle').offsetWidth;
-    scrollIt(middleWidth);
-  });
+    if (active1 === "middle" && scroller === scrollerMiddle1) {
+      document.querySelector('.middle1').style.width = transform + "px";
+      scroller.style.left = transform - 25 + "px";
+    }
+  }
+
+  // Initialize the first pair of images
+  active1 = "middle";
+  scrollIt(460, scrollerMiddle1);
+  active1 = false;
 });
 
-// Function to set random background images
-function setRandomImages() {
+function setRandomImageForImage2() {
+  // Get a random index from each image array
   const randomIndex1 = Math.floor(Math.random() * imageFilenames.length);
   const randomIndex2 = Math.floor(Math.random() * imageFilenames_inicio.length);
 
-  document.querySelector('.bottom').style.backgroundImage = `url(${imageFilenames[randomIndex1]})`;
-  document.querySelector('.middle').style.backgroundImage = `url(${imageFilenames_inicio[randomIndex2]})`;
-}
-
-// Function to scroll the middle layer
-function scrollIt(x) {
-  const wrapper = document.querySelector('.wrapper');
-  const transform = Math.max(0, Math.min(x, wrapper.offsetWidth));
-
-  document.querySelector('.middle').style.width = transform + "px";
-  scrollerMiddle1.style.left = transform - scrollerMiddle1.offsetWidth / 2 + "px";
+  // Set the src attributes of the images
+  image1.src = imageFilenames[randomIndex1];
+  image2.src = imageFilenames_inicio[randomIndex2];
 }
