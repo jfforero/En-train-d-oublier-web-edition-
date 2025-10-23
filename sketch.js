@@ -1,5 +1,5 @@
-let active = false;
-let scroller;
+let active1 = false;
+let scrollerMiddle1;
 
 // Image filenames
 const imageFilenames = [
@@ -7,57 +7,63 @@ const imageFilenames = [
   'tren6b.jpg','tren8b.jpg','tren9b.jpg','tren10b.jpg','tren11b.jpg'
 ];
 
-document.addEventListener('DOMContentLoaded', () => {
-  const wrapper = document.querySelector('.wrapper');
-  const image = document.getElementById('centerImage');
-  scroller = document.querySelector('.scroller-middle');
+const imageFilenames_inicio = [
+  'tren01.jpg','tren02.jpg','tren03.jpg','tren04.jpg','tren05.jpg','tren06.jpg'
+];
 
-  // Set initial random image
-  setRandomImage();
+document.addEventListener('DOMContentLoaded', function () {
+  const wrapper = document.querySelector('.wrapper');
+  scrollerMiddle1 = document.querySelector('.scroller-middle');
+
+  // Set initial random images
+  setRandomImages();
 
   // Mouse events for scroller
-  scroller.addEventListener('mousedown', () => {
-    active = true;
-    scroller.classList.add('scrolling');
+  scrollerMiddle1.addEventListener('mousedown', function () {
+    active1 = true;
+    scrollerMiddle1.classList.add('scrolling');
   });
 
-  document.body.addEventListener('mouseup', () => {
-    active = false;
-    scroller.classList.remove('scrolling');
+  document.body.addEventListener('mouseup', function () {
+    active1 = false;
+    scrollerMiddle1.classList.remove('scrolling');
   });
 
-  document.body.addEventListener('mouseleave', () => {
-    active = false;
-    scroller.classList.remove('scrolling');
+  document.body.addEventListener('mouseleave', function () {
+    active1 = false;
+    scrollerMiddle1.classList.remove('scrolling');
   });
 
-  document.body.addEventListener('mousemove', (e) => {
-    if (!active) return;
+  document.body.addEventListener('mousemove', function (e) {
+    if (!active1) return;
     const x = e.pageX - wrapper.getBoundingClientRect().left;
-    moveScroller(x);
+    scrollIt(x);
   });
 
-  // Initialize scroller in the center
-  moveScroller(wrapper.offsetWidth / 2);
+  // Initialize scroller in the middle
+  scrollIt(wrapper.offsetWidth / 2);
 
-  // Update scroller on window resize
+  // Resize handling
   window.addEventListener('resize', () => {
-    moveScroller(wrapper.offsetWidth / 2);
+    const middleWidth = document.querySelector('.middle').offsetWidth;
+    scrollIt(middleWidth);
   });
 });
 
-// Set random image
-function setRandomImage() {
-  const randomIndex = Math.floor(Math.random() * imageFilenames.length);
-  document.getElementById('centerImage').src = imageFilenames[randomIndex];
+// Function to set random background images
+function setRandomImages() {
+  const randomIndex1 = Math.floor(Math.random() * imageFilenames.length);
+  const randomIndex2 = Math.floor(Math.random() * imageFilenames_inicio.length);
+
+  document.querySelector('.bottom').style.backgroundImage = `url(${imageFilenames[randomIndex1]})`;
+  document.querySelector('.middle').style.backgroundImage = `url(${imageFilenames_inicio[randomIndex2]})`;
 }
 
-// Move scroller horizontally
-function moveScroller(x) {
+// Function to scroll the middle layer
+function scrollIt(x) {
   const wrapper = document.querySelector('.wrapper');
-  const scrollerWidth = scroller.offsetWidth;
-  const maxX = wrapper.offsetWidth - scrollerWidth;
+  const transform = Math.max(0, Math.min(x, wrapper.offsetWidth));
 
-  const transform = Math.max(0, Math.min(x - scrollerWidth / 2, maxX));
-  scroller.style.left = transform + "px";
+  document.querySelector('.middle').style.width = transform + "px";
+  scrollerMiddle1.style.left = transform - scrollerMiddle1.offsetWidth / 2 + "px";
 }
