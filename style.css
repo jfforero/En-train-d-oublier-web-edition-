@@ -1,56 +1,58 @@
-/* Reset */
+/* Normalize and disable selection */
 * {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden; /* prevent horizontal scroll */
-}
-
-/* Wrapper fills viewport and centers content */
+/* Wrapper - full width and height */
 .wrapper {
   width: 100%;
-  height: 100vh;
+  height: 100vh; /* full viewport height */
   position: relative;
   overflow: hidden;
-  display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: center;     /* vertical center */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+              0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
-/* Centered responsive image */
-#centerImage {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;  /* keep aspect ratio */
-  display: block;
+/* Background layers */
+.bottom,
+.middle,
+.top {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;   /* ensures full width */
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
   pointer-events: none;
+  overflow: hidden;
+  transition: background-image 0.3s ease-in-out;
 }
 
-/* Scroller overlay */
+/* Optional default colors */
+.bottom { background: #2196f3; }
+.middle { background: #bbdefb; }
+.top { background: #ffffff; }
+
+/* Scroller styling */
 .scroller-middle {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   width: 50px;
   height: 50px;
-  background-color: rgba(255,204,188,0.5);
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 204, 188, 0.5);
   border-radius: 50%;
   cursor: ew-resize;
   z-index: 10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.scroller-middle .scroller__thumb {
-  width: 80%;
-  height: 80%;
 }
 
 .scrolling {
