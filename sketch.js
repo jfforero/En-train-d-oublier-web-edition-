@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const wrapper = document.querySelector('.wrapper');
   scrollerMiddle1 = document.querySelector('.scroller-middle');
 
-  // Set multiple random images
-  setRandomImagesLayer('.bottom', imageFilenames, 5);
-  setRandomImagesLayer('.middle', imageFilenames_inicio, 5);
+  // Set a single random image for each layer
+  setRandomImage('.bottom', imageFilenames);
+  setRandomImage('.middle', imageFilenames_inicio);
 
   // Mouse events for scroller
   scrollerMiddle1.addEventListener('mousedown', () => {
@@ -51,25 +51,24 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-// Function to populate a layer with multiple random images
-function setRandomImagesLayer(layerSelector, images, count) {
+// Function to set a single random image at the center
+function setRandomImage(layerSelector, images) {
   const layer = document.querySelector(layerSelector);
-  layer.innerHTML = ''; // Clear existing images
 
-  for (let i = 0; i < count; i++) {
-    const img = document.createElement('img');
-    const randomIndex = Math.floor(Math.random() * images.length);
-    img.src = images[randomIndex];
-    img.style.position = 'absolute';
-    img.style.width = `${50 + Math.random() * 150}px`; // random width
-    img.style.height = 'auto';
-    img.style.top = `${Math.random() * 100}%`;
-    img.style.left = `${Math.random() * 100}%`;
-    img.draggable = false;
-    img.style.objectFit = 'cover';
-    img.style.transform = `translate(-50%, -50%) rotate(${Math.random()*30-15}deg)`; // random rotation
-    layer.appendChild(img);
-  }
+  const randomIndex = Math.floor(Math.random() * images.length);
+  const img = document.createElement('img');
+  img.src = images[randomIndex];
+  img.style.position = 'absolute';
+  img.style.top = '50%';
+  img.style.left = '50%';
+  img.style.transform = 'translate(-50%, -50%)';
+  img.style.width = '80%';   // adjust size as needed
+  img.style.height = 'auto';
+  img.draggable = false;
+
+  // Clear existing image and append new
+  layer.innerHTML = '';
+  layer.appendChild(img);
 }
 
 // Function to scroll the middle layer
