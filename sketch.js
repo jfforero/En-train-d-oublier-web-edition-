@@ -16,7 +16,17 @@ document.addEventListener('DOMContentLoaded', function () {
   scrollerMiddle1 = document.querySelector('.scroller-middle');
 
   // Set initial random images
-  setRandomImages();
+  function setRandomImage() {
+  const imageFilenames = [
+    'tren1b.jpg','tren2b.jpg','tren3b.jpg','tren4b.jpg','tren5b.jpg',
+    'tren6b.jpg','tren8b.jpg','tren9b.jpg','tren10b.jpg','tren11b.jpg'
+  ];
+
+  const randomIndex = Math.floor(Math.random() * imageFilenames.length);
+  document.getElementById('centerImage').src = imageFilenames[randomIndex];
+}
+
+document.addEventListener('DOMContentLoaded', setRandomImage);
 
   // Mouse events for scroller
   scrollerMiddle1.addEventListener('mousedown', function () {
