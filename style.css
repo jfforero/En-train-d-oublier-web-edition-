@@ -25,15 +25,18 @@
 }
 
 /* Image layers */
-.bottom img,
-.middle img {
-  position: absolute;      /* Position relative to their container */
-  top: 50%;                /* Vertical center */
-  left: 50%;               /* Horizontal center */
-  transform: translate(-50%, -50%); /* Offset by half of their size */
-  max-width: 100%;         /* Scale down if needed */
-  max-height: 100%;        /* Keep it inside the wrapper */
-  object-fit: cover;       /* Maintain aspect ratio and cover the container */
+.bottom, .middle, .top {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .bottom { background: #2196f3; }
