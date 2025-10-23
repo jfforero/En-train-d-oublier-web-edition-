@@ -18,7 +18,19 @@ html, body {
   height: 100vh;
   position: relative;
   overflow: hidden;
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center;     /* center vertically */
 }
+
+#centerImage {
+  max-width: 100%;    /* responsive width */
+  max-height: 100%;   /* responsive height */
+  display: block;
+  object-fit: contain; /* no stretching, keep aspect ratio */
+  pointer-events: none;
+}
+
 
 /* Background layers */
 .bottom,
