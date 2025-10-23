@@ -1,5 +1,5 @@
-let active = false;
-let scrollerMiddle;
+let active1 = false;
+let scrollerMiddle1;
 
 // Image filenames
 const imageFilenames = [
@@ -11,31 +11,31 @@ const imageFilenames_inicio = [
   'tren01.jpg','tren02.jpg','tren03.jpg','tren04.jpg','tren05.jpg','tren06.jpg'
 ];
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
   const wrapper = document.querySelector('.wrapper');
-  scrollerMiddle = document.querySelector('.scroller-middle');
+  scrollerMiddle1 = document.querySelector('.scroller-middle');
 
   // Set initial random images
   setRandomImages();
 
   // Mouse events for scroller
-  scrollerMiddle.addEventListener('mousedown', () => {
-    active = true;
-    scrollerMiddle.classList.add('scrolling');
+  scrollerMiddle1.addEventListener('mousedown', function () {
+    active1 = true;
+    scrollerMiddle1.classList.add('scrolling');
   });
 
-  document.body.addEventListener('mouseup', () => {
-    active = false;
-    scrollerMiddle.classList.remove('scrolling');
+  document.body.addEventListener('mouseup', function () {
+    active1 = false;
+    scrollerMiddle1.classList.remove('scrolling');
   });
 
-  document.body.addEventListener('mouseleave', () => {
-    active = false;
-    scrollerMiddle.classList.remove('scrolling');
+  document.body.addEventListener('mouseleave', function () {
+    active1 = false;
+    scrollerMiddle1.classList.remove('scrolling');
   });
 
-  document.body.addEventListener('mousemove', (e) => {
-    if (!active) return;
+  document.body.addEventListener('mousemove', function (e) {
+    if (!active1) return;
     const x = e.pageX - wrapper.getBoundingClientRect().left;
     scrollIt(x);
   });
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize scroller in the middle
   scrollIt(wrapper.offsetWidth / 2);
 
-  // Handle window resize
+  // Resize handling
   window.addEventListener('resize', () => {
     const middleWidth = document.querySelector('.middle').offsetWidth;
     scrollIt(middleWidth);
@@ -55,19 +55,15 @@ function setRandomImages() {
   const randomIndex1 = Math.floor(Math.random() * imageFilenames.length);
   const randomIndex2 = Math.floor(Math.random() * imageFilenames_inicio.length);
 
-  document.querySelector('#image1').src = imageFilenames[randomIndex1];
-  document.querySelector('#image2').src = imageFilenames_inicio[randomIndex2];
+  document.querySelector('.bottom').style.backgroundImage = `url(${imageFilenames[randomIndex1]})`;
+  document.querySelector('.middle').style.backgroundImage = `url(${imageFilenames_inicio[randomIndex2]})`;
 }
 
 // Function to scroll the middle layer
 function scrollIt(x) {
   const wrapper = document.querySelector('.wrapper');
-  const middleLayer = document.querySelector('.middle');
-
-  // Prevent scroller from going outside wrapper
   const transform = Math.max(0, Math.min(x, wrapper.offsetWidth));
-  middleLayer.style.width = transform + "px";
 
-  // Adjust scroller position
-  scrollerMiddle.style.left = transform - scrollerMiddle.offsetWidth / 2 + "px";
+  document.querySelector('.middle').style.width = transform + "px";
+  scrollerMiddle1.style.left = transform - scrollerMiddle1.offsetWidth / 2 + "px";
 }
