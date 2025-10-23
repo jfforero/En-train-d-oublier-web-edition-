@@ -3,27 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Image Scroller</title>
+  <title>Responsive Image Slider</title>
+
+  <!-- p5.js (optional, if you use it for other purposes) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wrapper">
-    <div class="bottom">
-      <img id="image1" src="tren2.jpg" draggable="false"/>
-    </div>
-    <div class="middle middle1">
-      <img id="image2" src="tren0.jpg" draggable="false"/>
-    </div>
-    <div class="scroller scroller-middle">
-      <svg class="scroller__thumb" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-        <polygon points="0 50 37 68 37 32 0 50" style="fill:#FFCCBC"/>
-        <polygon points="100 50 64 32 64 68 100 50" style="fill:#FFCCBC"/>
-      </svg>
+  <div id="page">
+    <div class="wrapper">
+      <!-- Bottom image -->
+      <div class="bottom">
+        <img id="image1" src="tren2.jpg" draggable="false" alt="Bottom Image"/>
+      </div>
+
+      <!-- Middle image -->
+      <div class="middle middle1">
+        <img id="image2" src="tren0.jpg" draggable="false" alt="Middle Image"/>
+      </div>
+
+      <!-- Draggable scroller -->
+      <div class="scroller scroller-middle scroller-middle1">
+        <svg class="scroller__thumb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <polygon points="0 50 37 68 37 32 0 50" style="fill:#FFCCBC"/>
+          <polygon points="100 50 64 32 64 68 100 50" style="fill:#FFCCBC"/>
+        </svg>
+      </div>
     </div>
   </div>
 
+  <!-- Scripts -->
   <script src="sketch.js"></script>
 </body>
 </html>
-
-
