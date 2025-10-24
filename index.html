@@ -10,28 +10,23 @@
 </head>
 
 <body>
-  <main>
-    <!-- Main content can go here -->
-  </main>
-
-  <script src="sketch.js"></script>
-
   <div id="page">
     <div class="wrapper">
-      
-      <!-- Bottom layer: Load the first image dynamically -->
+
+      <!-- Bottom layer -->
       <div class="bottom">
         <img id="image1" src="tren2.jpg" draggable="false"/>
       </div>
 
-      <!-- Middle layer: Updated class name for the first scroller, load second image dynamically -->
+      <!-- Middle layer -->
       <div class="middle middle1">
         <img id="image2" src="tren0.jpg" draggable="false"/>
       </div>
 
-      <!-- Scroller: Updated class name for the first scroller -->
+      <!-- Scroller -->
       <div class="scroller scroller-middle scroller-middle1">
-        <svg class="scroller__thumb" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+        <svg class="scroller__thumb" xmlns="http://www.w3.org/2000/svg" 
+             width="100" height="100" viewBox="0 0 100 100">
           <polygon points="0 50 37 68 37 32 0 50" style="fill:#FFCCBC"/>
           <polygon points="100 50 64 32 64 68 100 50" style="fill:#FFCCBC"/>
         </svg>
@@ -39,5 +34,7 @@
 
     </div>
   </div>
+
+  <script src="sketch.js"></script>
 </body>
 </html>
